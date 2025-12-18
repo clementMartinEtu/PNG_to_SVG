@@ -9,6 +9,18 @@ width, height = image.size
 
 # Retrieve all corner points of one hexagon
 def hexagon_points(cx, cy, size):
+    """
+    Compute the 6 corner points of a regular hexagon.
+
+    Args:
+        cx (float): X coordinate of the hexagon center.
+        cy (float): Y coordinate of the hexagon center.
+        size (float): Radius of the hexagon.
+
+    Returns:
+        list[tuple[float, float]]: List of 6 (x, y) coordinates of the vertices.
+
+    """
     points = []
 
     for i in range(6):
@@ -18,13 +30,38 @@ def hexagon_points(cx, cy, size):
 
     return points
 
-# Sample color at (x, y) checking that it is within bounds
 def sample_color(px, cx, cy, width, height):
+    """
+    Sample the RGB color of a pixel at the center of a hexagon,
+    checking that the coordinates are within image bounds.
+
+    Args:
+        px: PIL PixelAccess object.
+        cx (float): X coordinate of the hexagon center.
+        cy (float): Y coordinate of the hexagon center.
+        width (int): Image width.
+        height (int): Image height.
+
+    Returns:
+        tuple[int, int, int]: RGB color (r, g, b).
+        Returns (0, 0, 0) if coordinates are out of bounds.
+    """
     if cx >= width or cy >= height:
         return (0, 0, 0)
     return px[int(cx), int(cy)]
 
 def generate_svg(image, hex_size):
+    """
+    Generate a list of SVG <polygon> elements representing a
+    hexagonal tiling of the image.
+
+    Args:
+        image: PIL.Image object in RGB mode.
+        hex_size (float): Radius of each hexagon.
+
+    Returns:
+        list[str]: List of SVG <polygon> strings.
+    """
     width, height = image.size
     px = image.load()
 
@@ -68,3 +105,5 @@ if __name__ == '__main__':
         for element in svg_elements:
             f.write(f"  {element}\n")
         f.write('</svg>\n')
+    
+    print("SVG file 'image/hexagonal.svg' generated successfully.")
