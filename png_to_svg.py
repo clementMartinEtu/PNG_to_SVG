@@ -20,7 +20,7 @@ def hexagon_points(cx, cy, size):
     return points
 
 # Sample color at (x, y) checking that it is within bounds
-def sample_color(px, x, y, width, height):
-    if x >= width or y >= height:
+def sample_color(px, cx, cy, width, height):
+    if cx >= width or cy >= height:
         return (0, 0, 0)
-    return px[int(x), int(y)]
+    return px[int(cx), int(cy)]
