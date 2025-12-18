@@ -1,6 +1,5 @@
 from PIL import Image
 import math
-import webbrowser
 
 image = Image.open("image/screenshot.jpg")
 image = image.convert("RGB")
@@ -60,14 +59,12 @@ def generate_svg(image, hex_size):
 #launch the svg file
 if __name__ == '__main__':
 
-    HEX_SIZE = 5
+    HEX_SIZE = 10
 
     svg_elements = generate_svg(image, HEX_SIZE)
     #save to svg file
-    with open("output_hexagonal.svg", "w") as f:
+    with open("image/hexagonal.svg", "w") as f:
         f.write(f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}">\n')
         for element in svg_elements:
             f.write(f"  {element}\n")
         f.write('</svg>\n')
-
-    webbrowser.open("output_hexagonal.svg")
